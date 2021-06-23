@@ -50,6 +50,7 @@ class MajesticHandler : EventHandler
 		{
 			case 'HD500SWLightAmmo': MajesticAmmo.ItemsThatUseThis.Push("HDMajestic"); break;
 			case 'HDMajesticMag': MajesticAmmo.ItemsThatUseThis.Push("HDMajestic"); break;
+			case 'HDBattery': MajesticAmmo.ItemsThatUseThis.Push("HDMajestic"); break;
 		}
 	}
 }
@@ -114,15 +115,23 @@ class HDMajestic : HDHandgun
 	{
 		if (owner)
 		{
+			double oldAngle = owner.angle;
 			amt = clamp(amt, 1, 10);
 			if (owner.CheckInventory("HD500SWLightAmmo", 1))
 			{
 				owner.A_DropInventory("HD500SWLightAmmo", amt * 10);
+				owner.angle += 15;
 			}
 			else
 			{
 				owner.A_DropInventory("HDMajesticMag", amt);
+				owner.angle += 15;
 			}
+			if (owner.CheckInventory("HDBattery", 1))
+			{
+				owner.A_DropInventory("HDBattery", 1);
+			}
+			owner.angle = oldAngle;
 		}
 	}
 
@@ -281,11 +290,13 @@ class HDMajestic : HDHandgun
 		Fire:
 			#### # 0 A_JumpIf(invoker.WeaponStatus[MJProp_Mag] > 0 && invoker.WeaponStatus[MJProp_Battery] > 0, 1);
 			Goto Nope;
-			#### A 0 A_ReFire();
-		Hold:
 			#### A 1
 			{
-				A_WeaponBusy(false);
+				if (Pressing(BT_SPEED))
+				{
+					SetWeaponState("Nope");
+					return;
+				}
 				if (invoker.WeaponStatus[MJProp_Charge] < MaxCharge)
 				{
 					invoker.WeaponStatus[MJProp_Charge]++;
@@ -304,7 +315,7 @@ class HDMajestic : HDHandgun
 					return;
 				}
 			}
-			#### A 0 A_ReFire();
+			#### A 0 A_ReFire("Fire");
 			#### B 1
 			{
 				HDPlayerPawn(self).gunbraced = false;
@@ -330,7 +341,7 @@ class HDMajestic : HDHandgun
 			#### D 1 Offset(0, 50);
 			#### B 2 Offset(0, 40);
 			#### A 2 Offset(0, 32);
-			#### A 0 A_ReFire();
+			#### A 0 A_ReFire("Fire");
 			Goto Ready;
 
 		Reload:
