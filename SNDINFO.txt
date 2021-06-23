@@ -1,0 +1,14 @@
+Majestic/Fire1 "Sounds/MajesticFire1.wav"
+Majestic/Fire2 "Sounds/MajesticFire1.wav"
+Majestic/Fire3 "Sounds/MajesticFire1.wav"
+$random Majestic/Fire
+{
+	Majestic/Fire1
+	Majestic/Fire2
+	Majestic/Fire3
+}
+
+Majestic/MagOut	"Sounds/MajesticMagOut.wav"
+Majestic/MagIn	"Sounds/MajesticMagIn.wav"
+Majestic/Eject "Sounds/MajesticMagEject.wav"
+Majestic/Charge "Sounds/MajesticCharge.ogg"
