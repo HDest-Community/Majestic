@@ -180,9 +180,9 @@ class HDMajestic : HDHandgun
 		
 		if (hdw.WeaponStatus[MJProp_Mag] >= 0)
 		{
-			for (int i = 0; i < 6; ++i)
+			for (int i = 0; i < HDMajesticMag.MagCapacity; ++i)
 			{
-				double DrawAngle = i * (360.0 / 6.0) - 180;
+				double DrawAngle = i * (360.0 / HDMajesticMag.MagCapacity) - 180;
 				vector2 DrawPos = (sin(drawangle), cos(DrawAngle)) * 5;
 				sb.Fill(hdw.WeaponStatus[MJProp_Mag] > i ? Color(255, 240, 230, 40) : Color(200, 30, 26, 24), DrawPos.x - 24, DrawPos.y - 21, 3, 3, sb.DI_SCREEN_CENTER_BOTTOM | sb.DI_ITEM_CENTER);
 			}
@@ -624,7 +624,17 @@ class HDMajesticMag : HDMagAmmo
 {
 	override string, string, name, double GetMagSprite(int thismagamt)
 	{
-		return (thismagamt > 0) ? "MJMGA0" : "MJMGB0", "SWRNA0", "HD500SWLightAmmo", 0.8;
+		string spr;
+		switch (thismagamt)
+		{
+			case 0: spr = "MJMGC0"; break;
+			case 1: spr = "MJMGD0"; break;
+			case 2: spr = "MJMGE0"; break;
+			case 3: spr = "MJMGF0"; break;
+			case 4: spr = "MJMGG0"; break;
+			case 5: spr = "MJMGH0"; break;
+		}
+		return spr, "SWRNA0", "HD500SWLightAmmo", 0.5;
 	}
 
 	override void GetItemsThatUseThis()
@@ -632,7 +642,7 @@ class HDMajesticMag : HDMagAmmo
 		ItemsThatUseThis.Push("HDMajestic");
 	}
 
-	const MagCapacity = 6;
+	const MagCapacity = 5;
 	const EncMag = 8;
 	const EncMagEmpty = EncMag * 0.2;
 	const EncMagLoaded = EncMag * 0.2;
