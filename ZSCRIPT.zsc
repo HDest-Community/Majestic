@@ -293,11 +293,7 @@ class HDMajestic : HDHandgun
 			Goto Nope;
 			#### A 1
 			{
-				if (Pressing(BT_SPEED) || HDPlayerPawn(self).fallroll)
-				{
-					SetWeaponState("Nope");
-					return;
-				}
+				A_WeaponReady(WRF_NOFIRE);
 				if (invoker.WeaponStatus[MJProp_Charge] < MaxCharge)
 				{
 					invoker.WeaponStatus[MJProp_Charge]++;
@@ -328,7 +324,7 @@ class HDMajestic : HDHandgun
 				A_Light1();
 				A_StartSound("Majestic/Fire", CHAN_WEAPON);
 
-				HDB_500SWElectrified b = HDB_500SWElectrified(HDBulletActor.FireBullet(self, "HDB_500SWElectrified", speedfactor: frandom(0.98, 1.02) + 2.0 * (invoker.WeaponStatus[MJProp_Charge] / double(MaxCharge))));
+				HDB_500SWElectrified b = HDB_500SWElectrified(HDBulletActor.FireBullet(self, "HDB_500SWElectrified", speedfactor: frandom(0.98, 1.02) + 1.5 * (invoker.WeaponStatus[MJProp_Charge] / double(MaxCharge))));
 				b.Charge = invoker.WeaponStatus[MJProp_Charge];
 				A_ResetCharges();
 				A_AlertMonsters();
