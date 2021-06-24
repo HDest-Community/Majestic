@@ -8,7 +8,9 @@ $random Majestic/Fire
 	Majestic/Fire3
 }
 
-Majestic/MagOut	"Sounds/MajesticMagOut.wav"
-Majestic/MagIn	"Sounds/MajesticMagIn.wav"
+Majestic/MagOut "Sounds/MajesticMagOut.wav"
+Majestic/MagIn "Sounds/MajesticMagIn.wav"
 Majestic/Eject "Sounds/MajesticMagEject.wav"
 Majestic/Charge "Sounds/MajesticCharge.ogg"
+$alias Majestic/BatteryOut weapons/plasopen
+$alias Majestic/BatteryIn weapons/plasclose2
