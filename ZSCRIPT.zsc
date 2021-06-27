@@ -556,6 +556,7 @@ class HDMajestic : HDHandgun
 	}
 }
 
+// [Ace] This needs to be a separate actor because if put on the bullet itself ArcZap acts weird and gets spawned *on the player*, which makes sense given that the bullet hasn't travelled the distance yet.
 class MajesticExplosion : HDActor
 {
 	States
