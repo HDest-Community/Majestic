@@ -2,8 +2,8 @@ Code:
 - Accensus
 
 Sounds:
-- Magmacow (https://gamebanana.com/sounds/28445)
-- Navaro (https://gamebanana.com/sounds/19952)
+- Navaro (https://gamebanana.com/sounds/19952): everything but the fire.
+- Fire sound is taken from Bullet-Eye's Assassin Vulcan weapon.
 
 Sprites:
 - Ibrahim Aysan (https://www.artstation.com/artwork/3orQlD), sprited by Mor'ladim.

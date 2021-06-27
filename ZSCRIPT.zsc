@@ -335,6 +335,7 @@ class HDMajestic : HDHandgun
 				HDFlashAlpha(128);
 				A_Light1();
 				A_StartSound("Majestic/Fire", CHAN_WEAPON);
+				A_StartSound("Majestic/Fire", CHAN_WEAPON, CHANF_OVERLAP);
 
 				HDB_500SWElectrified b = HDB_500SWElectrified(HDBulletActor.FireBullet(self, "HDB_500SWElectrified", speedfactor: frandom(0.98, 1.02) + 1.5 * (invoker.WeaponStatus[MJProp_Charge] / double(MaxCharge))));
 				b.Charge = invoker.WeaponStatus[MJProp_Charge];
