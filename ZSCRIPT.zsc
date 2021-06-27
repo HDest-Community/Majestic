@@ -563,11 +563,11 @@ class MajesticExplosion : HDActor
 		Spawn:
 			TNT1 A 0 NoDelay
 			{
-				target.A_StartSound("weapons/plascrack", 11);
-				target.A_StartSound("weapons/plascrack", 12);
-				target.A_StartSound("weapons/plascrack", 13);
-				target.A_StartSound("world/tbfar", 14);
-				target.A_StartSound("world/explode", 15, volume: 0.5);
+				A_StartSound("weapons/plascrack", 11);
+				A_StartSound("weapons/plascrack", 12);
+				A_StartSound("weapons/plascrack", 13);
+				A_StartSound("world/tbfar", 14);
+				A_StartSound("world/explode", 15, volume: 0.5);
 				
 				double fac = 1.0 + (stamina / (HDMajestic.MaxCharge / double(HDMajestic.Tiers)));
 				A_HDBlast(
@@ -610,7 +610,7 @@ class HDB_500SWElectrified : HDB_500SW
 
 		Actor exp = Spawn("MajesticExplosion", hitpos, ALLOW_REPLACE);
 		exp.stamina = Charge;
-		exp.target = self;
+		exp.target = target;
 		exp.angle = angle;
 		exp.pitch = pitch;
 		Exploded = true;
