@@ -618,7 +618,10 @@ class HDB_500SWElectrified : HDB_500SW
 
 	override void OnHitActor(actor hitactor, vector3 hitpos, vector3 vu, int flags)
 	{
-		Kaboom(hitpos);
+		if (hitactor.bSHOOTABLE)
+		{
+			Kaboom(hitpos);
+		}
 		Super.OnHitActor(hitactor, hitpos, vu, flags);
 	}
 
