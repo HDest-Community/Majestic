@@ -41,7 +41,7 @@ class MajesticHandler : EventHandler
 	override void WorldThingSpawned(WorldEvent e)
 	{
 		let MajesticAmmo = HDAmmo(e.Thing);
-		if (MajesticAmmo)
+		if (!MajesticAmmo)
 		{
 			return;
 		}
