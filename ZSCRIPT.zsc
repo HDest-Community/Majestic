@@ -176,11 +176,11 @@ class HDMajestic : HDHandgun
 			int nextMag = sb.GetNextLoadMag(HDMagAmmo(hpl.FindInventory('HDMajesticMag')));
 			if (nextMag > 0)
 			{
-				sb.DrawImage("MJMGA0", (-44, -10), sb. DI_SCREEN_CENTER_BOTTOM);
+				sb.DrawImage("MJMGA0", (-44, -10), sb. DI_SCREEN_CENTER_BOTTOM, scale: (0.75, 0.75));
 			}
 			else
 			{
-				sb.DrawImage("MJMGB0", (-44, -10), sb.DI_SCREEN_CENTER_BOTTOM, alpha: nextMag ? 0.6 : 1.0);
+				sb.DrawImage("MJMGB0", (-44, -10), sb.DI_SCREEN_CENTER_BOTTOM, alpha: nextMag ? 0.6 : 1.0, scale: (0.75, 0.75));
 			}
 			sb.DrawNum(hpl.CountInv('HDMajesticMag'), -39, -8, sb.DI_SCREEN_CENTER_BOTTOM); 
 
@@ -690,7 +690,7 @@ class HDMajesticMag : HDMagAmmo
 		Tag "'Majestic' magazine";
 		Inventory.PickupMessage "Picked up a Majestic magazine.";
 		HDPickup.RefId "mjm";
-		Scale 0.30;
+		Scale 0.25;
 	}
 
 	States
