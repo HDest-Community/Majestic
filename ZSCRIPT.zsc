@@ -666,7 +666,7 @@ class HDMajesticMag : HDMagAmmo
 {
 	override string, string, name, double GetMagSprite(int thismagamt)
 	{
-		return (thismagamt > 0) ? "MJMGA0" : "MJMGB0", "SWRNA0", "HD500SWLightAmmo", 0.8;
+		return String.Format("MJMG%c0", 67 + thismagamt), "SWRNA0", "HD500SWLightAmmo", 0.5;
 	}
 
 	override void GetItemsThatUseThis()
