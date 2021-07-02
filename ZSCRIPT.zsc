@@ -74,6 +74,10 @@ class HDMajestic : HDHandgun
 
 	override void DetachFromOwner()
 	{
+		if (WeaponStatus[MJProp_Charge] > 0)
+		{
+			A_FireMajestic(true);
+		}
 		A_ResetCharges();
 		Super.DetachFromOwner();
 	}
@@ -240,6 +244,29 @@ class HDMajestic : HDHandgun
 		invoker.WeaponStatus[MJProp_Charge] = 0;
 	}
 
+	private action void A_FireMajestic(bool fromDrop)
+	{
+		// [Ace] Otherwise it freezes the game.
+		if (!fromDrop)
+		{
+			HDFlashAlpha(128);
+		}
+		A_Light1();
+		A_StartSound("Majestic/Fire", CHAN_WEAPON);
+		A_StartSound("Majestic/Fire", CHAN_WEAPON, CHANF_OVERLAP);
+
+		HDB_500SWElectrified b = HDB_500SWElectrified(HDBulletActor.FireBullet(self, "HDB_500SWElectrified", speedfactor: frandom(0.98, 1.02) + 1.5 * (invoker.WeaponStatus[MJProp_Charge] / double(MaxCharge))));
+		b.Charge = invoker.WeaponStatus[MJProp_Charge];
+		A_ResetCharges();
+		A_AlertMonsters();
+		A_ZoomRecoil(0.98);
+		A_MuzzleClimb(-frandom(0.25, 1.8), -frandom(4.0, 6.0));
+
+		invoker.WeaponStatus[MJProp_SpentRounds]++;
+		invoker.WeaponStatus[MJProp_Mag]--;
+		invoker.WeaponStatus[MJProp_Battery]--;
+	}
+
 	const MaxCharge = 40;
 	const Tiers = 3;
 	private bool HasPlayedSound[Tiers];
@@ -267,13 +294,43 @@ class HDMajestic : HDHandgun
 			}
 			Stop;
 		Ready:
-			MJCG C 0
+			MJCG C 1
 			{
+				A_WeaponReady(WRF_NOFIRE | WRF_ALL);
 				A_CheckMajesticFrame();
 				A_CheckMajesticHand();
-				A_ResetCharges();
+
+				if (PressingFire())
+				{
+					if (PressingAltFire() || invoker.WeaponStatus[MJProp_Mag] <= 0  || invoker.WeaponStatus[MJProp_Battery] <= 0)
+					{
+						A_ResetCharges();
+						player.GetPSprite(PSP_WEAPON).frame = 2;
+						SetWeaponState("Nope");
+						return;
+					}
+
+					A_TakeInventory("IsMoving");
+					player.GetPSprite(PSP_WEAPON).frame = 0;
+					let plr = HDPlayerPawn(self);
+					if (invoker.WeaponStatus[MJProp_Charge] < MaxCharge)
+					{
+						invoker.WeaponStatus[MJProp_Charge]++;
+
+						int index = invoker.WeaponStatus[MJProp_Charge] / (MaxCharge / Tiers);
+						if (index > 0 && !invoker.HasPlayedSound[index - 1])
+						{
+							invoker.HasPlayedSound[index - 1] = true;
+							A_StartSound("Majestic/Charge", 10, pitch: 1.0 + 0.1 * (index - 1));
+						}
+					}
+				}
+				else if (invoker.WeaponStatus[MJProp_Charge] > 0)
+				{
+					SetWeaponState('Fire');
+					return;
+				}
 			}
-			#### # 1 A_WeaponReady(WRF_ALL);
 			Goto ReadyEnd;
 		Select0:
 			MJCG C 0
@@ -300,53 +357,13 @@ class HDMajestic : HDHandgun
 			Goto Ready;
 
 		Fire:
-			#### # 0 A_JumpIf(invoker.WeaponStatus[MJProp_Mag] > 0 && invoker.WeaponStatus[MJProp_Battery] > 0, 1);
-			Goto Nope;
-			#### A 1
-			{
-				A_WeaponReady(WRF_NOFIRE);
-				if (invoker.WeaponStatus[MJProp_Charge] < MaxCharge)
-				{
-					invoker.WeaponStatus[MJProp_Charge]++;
-
-					int index = invoker.WeaponStatus[MJProp_Charge] / (MaxCharge / Tiers);
-					if (index > 0 && !invoker.HasPlayedSound[index - 1])
-					{
-						invoker.HasPlayedSound[index - 1] = true;
-						A_StartSound("Majestic/Charge", 10, pitch: 1.0 + 0.1 * (index - 1));
-					}
-				}
-				if (PressingAltFire())
-				{
-					A_ResetCharges();
-					SetWeaponState("Nope");
-					return;
-				}
-			}
-			#### A 0 A_ReFire("Fire");
+			#### A 1;
 			#### C 1
 			{
 				HDPlayerPawn(self).gunbraced = false;
 				A_MuzzleClimb(-frandom(0.1, 0.2), -frandom(0.1, 0.2));
 			}
-			#### D 1 Offset(0, 40)
-			{
-				HDFlashAlpha(128);
-				A_Light1();
-				A_StartSound("Majestic/Fire", CHAN_WEAPON);
-				A_StartSound("Majestic/Fire", CHAN_WEAPON, CHANF_OVERLAP);
-
-				HDB_500SWElectrified b = HDB_500SWElectrified(HDBulletActor.FireBullet(self, "HDB_500SWElectrified", speedfactor: frandom(0.98, 1.02) + 1.5 * (invoker.WeaponStatus[MJProp_Charge] / double(MaxCharge))));
-				b.Charge = invoker.WeaponStatus[MJProp_Charge];
-				A_ResetCharges();
-				A_AlertMonsters();
-				A_ZoomRecoil(0.98);
-				A_MuzzleClimb(-frandom(0.25, 1.8), -frandom(4.0, 6.0));
-
-				invoker.WeaponStatus[MJProp_SpentRounds]++;
-				invoker.WeaponStatus[MJProp_Mag]--;
-				invoker.WeaponStatus[MJProp_Battery]--;
-			}
+			#### D 1 Offset(0, 40) A_FireMajestic(false);
 			#### C 1 Offset(0, 70);
 			#### C 2 Offset(0, 50);
 			#### # 2 Offset(0, 32) A_CheckMajesticFrame();
