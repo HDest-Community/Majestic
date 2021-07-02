@@ -703,8 +703,8 @@ class HDMajesticMag : HDMagAmmo
 		HDMagAmmo.RoundType "HD500SWLightAmmo";
 		HDMagAmmo.RoundBulk ENC_50SW_LOADED;
 		HDMagAmmo.MagBulk EncMagEmpty;
-		Tag "'Majestic' magazine";
-		Inventory.PickupMessage "Picked up a Majestic magazine.";
+		Tag "'Majestic' cylinder";
+		Inventory.PickupMessage "Picked up a Majestic cylinder.";
 		HDPickup.RefId "mjm";
 		Scale 0.25;
 	}
