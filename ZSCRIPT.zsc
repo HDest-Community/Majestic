@@ -367,7 +367,6 @@ class HDMajestic : HDHandgun
 			#### C 1 Offset(0, 70);
 			#### C 2 Offset(0, 50);
 			#### # 2 Offset(0, 32) A_CheckMajesticFrame();
-			#### # 0 A_ReFire("Fire");
 			Goto Ready;
 
 		Reload:
