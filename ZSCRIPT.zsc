@@ -377,6 +377,7 @@ class HDMajestic : HDHandgun
 		AltReload:
 			#### # 0
 			{
+				A_ResetCharges();
 				invoker.WeaponStatus[MJProp_Flags] &= ~MJF_JustUnload;
 
 				int type = invoker.WeaponStatus[MJProp_LoadType] = PressingAltReload() ? 1 : 0;
@@ -393,6 +394,7 @@ class HDMajestic : HDHandgun
 		Unload:
 			#### # 0
 			{
+				A_ResetCharges();
 				invoker.WeaponStatus[MJProp_Flags] |= MJF_JustUnload;
 				int type = invoker.WeaponStatus[MJProp_LoadType] = PressingUse() ? 1 : 0;
 				if (invoker.WeaponStatus[type == 1 ? MJProp_Battery : MJProp_Mag] >= 0)
