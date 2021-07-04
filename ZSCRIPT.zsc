@@ -615,13 +615,13 @@ class MajesticExplosion : HDActor
 				A_StartSound("world/explode", 15, volume: 0.5);
 				
 				A_HDBlast(
-					blastradius: 20 * stamina, 
-					blastdamage: int(random(20, 80) * stamina), 
+					blastradius: 25 * stamina, 
+					blastdamage: int(random(40, 90) * stamina), 
 					blastdamagetype: "slashing");
 
 				actor ltt = Spawn("LingeringThunder", pos, ALLOW_REPLACE);
 				ltt.target = target;
-				ltt.stamina = 20 * stamina;
+				ltt.stamina = 25 * stamina;
 
 				A_SprayDecal("MajesticScorch", 14);
 				DistantQuaker.Quake(self, stamina, 35, 512, 8, 128, 256, 256);
@@ -634,7 +634,7 @@ class MajesticExplosion : HDActor
 				DoorDestroyer.DestroyDoor(self, frandom(1, frandom(8, 16) * stamina), frandom(1, frandom(4, 16) * stamina));
 
 				Spawn("HDExplosion", pos + (frandom(-4, 4), frandom(-4, 4), frandom(-4, 4)), ALLOW_REPLACE);
-				for (int i = 0; i < 5 * stamina; ++i)
+				for (int i = 0; i < 7 * stamina; ++i)
 				{
 					ArcZap(self);
 				}
