@@ -2,7 +2,8 @@ Code:
 - Accensus
 
 Sounds:
-- Navaro (https://gamebanana.com/sounds/19952): everything but the fire.
+- Magmacow (https://gamebanana.com/sounds/54036): hammer.
+- Navaro (https://gamebanana.com/sounds/19952): everything else but the fire.
 - Fire sound is taken from Bullet-Eye's Assassin Vulcan weapon.
 
 Sprites:

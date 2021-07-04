@@ -3,5 +3,6 @@ Majestic/MagOut "Sounds/MajesticMagOut.wav"
 Majestic/MagIn "Sounds/MajesticMagIn.wav"
 Majestic/Eject "Sounds/MajesticMagEject.wav"
 Majestic/Charge "Sounds/MajesticCharge.ogg"
+Majestic/Hammer "Sounds/MajesticHammer.wav"
 $alias Majestic/BatteryOut weapons/plasopen
 $alias Majestic/BatteryIn weapons/plasclose2
