@@ -300,6 +300,8 @@ class HDMajestic : HDHandgun
 		Ready:
 			MJCG # 1
 			{
+				A_WeaponReady(WRF_NOFIRE | WRF_ALL);
+				A_CheckMajesticHand();
 				int tier = invoker.WeaponStatus[MJProp_Charge] / (HDMajestic.MaxCharge / HDMajestic.Tiers);
 				if (PressingAltFire() || invoker.WeaponStatus[MJProp_Mag] <= 0  || invoker.WeaponStatus[MJProp_Battery] <= 0)
 				{
@@ -342,8 +344,6 @@ class HDMajestic : HDHandgun
 				{
 					A_CheckMajesticFrame();
 				}
-				A_WeaponReady(WRF_NOFIRE | WRF_ALL);
-				A_CheckMajesticHand();
 			}
 			Goto ReadyEnd;
 		Select0:
