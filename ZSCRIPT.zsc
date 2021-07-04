@@ -78,6 +78,7 @@ class HDMajestic : HDHandgun
 		{
 			A_FireMajestic(true);
 		}
+		MustCancel = false;
 		A_ResetCharges();
 		Super.DetachFromOwner();
 	}
@@ -274,6 +275,7 @@ class HDMajestic : HDHandgun
 	const MaxCharge = 40;
 	const Tiers = 3;
 	private bool HasPlayedSound[Tiers];
+	private bool MustCancel;
 
 	Default
 	{
@@ -305,8 +307,9 @@ class HDMajestic : HDHandgun
 				int tier = invoker.WeaponStatus[MJProp_Charge] / (HDMajestic.MaxCharge / HDMajestic.Tiers);
 				if (PressingFire() || invoker.WeaponStatus[MJProp_Charge] > 0 && player.GetPSprite(PSP_WEAPON).frame == 1)
 				{
-					if (PressingAltFire() || invoker.WeaponStatus[MJProp_Mag] <= 0)
+					if (PressingAltFire() || invoker.WeaponStatus[MJProp_Mag] <= 0 || invoker.MustCancel)
 					{
+						invoker.MustCancel = true;
 						A_ResetCharges();
 						if (player.GetPSprite(PSP_WEAPON).frame > 0)
 						{
@@ -317,6 +320,7 @@ class HDMajestic : HDHandgun
 						}
 						else
 						{
+							invoker.MustCancel = false;
 							SetWeaponState("Nope");
 						}
 						return;
@@ -368,6 +372,7 @@ class HDMajestic : HDHandgun
 		Deselect0:
 			MJCG A 0
 			{
+				invoker.MustCancel = false;
 				A_CheckMajesticFrame();
 				A_CheckMajesticHand();
 				A_ResetCharges();
