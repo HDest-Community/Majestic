@@ -448,7 +448,7 @@ class HDMajestic : HDHandgun
 					}
 					for (int i = 0; i < invoker.WeaponStatus[MJProp_SpentRounds]; ++i)
 					{
-						A_SpawnItemEx('HDSpent500', 6 * cos(pitch), 0, height / 2 + 6, vel.x, vel.y, vel.z, 0, SXF_ABSOLUTEVELOCITY | SXF_NOCHECKPOSITION | SXF_TRANSFERPITCH);
+						A_EjectCasing('HDSpent500', 11, -random(79, 81), frandom(6.0, 6.5));
 					}
 					invoker.WeaponStatus[MJProp_SpentRounds] = 0;
 				}
