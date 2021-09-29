@@ -334,6 +334,7 @@ class HDMajestic : HDHandgun
 						player.GetPSprite(PSP_WEAPON).frame++;
 						A_WeaponOffset(0, 36);
 					}
+					
 					let plr = HDPlayerPawn(self);
 					if (invoker.Charge < (invoker.WeaponStatus[MJProp_Battery] > 0 ? MaxCharge : 1))
 					{
