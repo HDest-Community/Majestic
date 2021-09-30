@@ -1,3 +1,7 @@
+### Important
+---
+- This mod requires [BulletLib](https://gitlab.com/accensi/hd-addons/hdbulletlib).
+
 ### Notes
 ---
 - The loadout codes are `maj` and `mjm` for the weapon and mag respectively.
