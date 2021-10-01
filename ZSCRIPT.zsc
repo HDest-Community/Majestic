@@ -389,7 +389,7 @@ class HDMajestic : HDHandgun
 			{
 				HDPlayerPawn(self).gunbraced = false;
 			}
-			#### E 1 Offset(0, 40) A_FireMajestic(false);
+			#### E 1 Offset(0, 40) Bright A_FireMajestic(false);
 			#### A 1 Offset(0, 70);
 			#### A 2 Offset(0, 50);
 			#### # 2 Offset(0, 32) A_CheckMajesticFrame();
