@@ -94,7 +94,7 @@ class HDMajestic : HDHandgun
 		}
 		return BaseBulk;
 	}
-	override string, double GetPickupSprite() { return WeaponStatus[MJProp_Mag] >= 0 ? "MJCGZ0" : "MJCGY0", 0.3; }
+	override string, double GetPickupSprite() { return WeaponStatus[MJProp_Mag] >= 0 ? "MJCGZ0" : "MJCGY0", 0.4; }
 
 	override void InitializeWepStats(bool idfa)
 	{
