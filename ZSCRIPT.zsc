@@ -711,8 +711,8 @@ class HDMajesticMag : HDMagAmmo
 
 	const MagCapacity = 6;
 	const EncMag = 8;
-	const EncMagEmpty = EncMag * 0.2;
-	const EncMagLoaded = EncMag * 0.2;
+	const EncMagEmpty = EncMag * 0.4;
+	const EncMagLoaded = EncMag * 0.6;
 
 	Default
 	{
