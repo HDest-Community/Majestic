@@ -449,7 +449,8 @@ class HDMajestic : HDHandgun
 					}
 					for (int i = 0; i < invoker.WeaponStatus[MJProp_SpentRounds]; ++i)
 					{
-						A_EjectCasing('HDSpent500', 11, -random(79, 81), frandom(6.0, 6.5), 0.78);
+						Actor a = A_EjectCasing('HDSpent500', 8, -random(88, 92), frandom(1.0, 2.0), -frandom(0.5, 1.5));
+						a.roll = random(0, 359);
 					}
 					invoker.WeaponStatus[MJProp_SpentRounds] = 0;
 				}
@@ -633,7 +634,7 @@ class MajesticExplosion : HDActor
 				Spawn("HDExplosion", pos + (frandom(-4, 4), frandom(-4, 4), frandom(-4, 4)), ALLOW_REPLACE);
 				for (int i = 0; i < 4 * stamina; ++i)
 				{
-					ArcZap(self, maxdamage: 8 * stamina);
+					ArcZap(self, maxdamage: 24 * stamina);
 				}
 			}
 			Stop;
