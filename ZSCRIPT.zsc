@@ -83,7 +83,7 @@ class HDMajestic : HDHandgun
 	}
 	override bool AddSpareWeapon(actor newowner) { return AddSpareWeaponRegular(newowner); }
 	override HDWeapon GetSpareWeapon(actor newowner, bool revMJCe, bool doselect) { return GetSpareWeaponRegular(newowner, revMJCe, doselect); }
-	override double GunMass() { return 10; }
+	override double GunMass() { return 7.5 + (Mag >= 0 ? HDMajesticMag.EncMagLoaded * 0.1 + WeaponStatus[MJProp_Mag] * ENC_50SW_LOADED * 0.04); }
 	override double WeaponBulk()
 	{
 		double BaseBulk = 60;
