@@ -641,7 +641,7 @@ class MajesticExplosion : HDActor
 				DoorDestroyer.DestroyDoor(self, frandom(1, frandom(8, 16) * stamina), frandom(1, frandom(4, 16) * stamina));
 
 				Spawn("HDExplosion", pos + (frandom(-4, 4), frandom(-4, 4), frandom(-4, 4)), ALLOW_REPLACE);
-				for (int i = 0; i < 4 * stamina; ++i)
+				for (int i = 0; i < 8 * stamina; ++i)
 				{
 					ArcZap(self, maxdamage: 64 * stamina);
 				}
