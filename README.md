@@ -5,7 +5,8 @@
 ### Notes
 ---
 - The loadout codes are `maj` and `mjm` for the weapon and mag respectively.
-
+- Configuration codes are:
+	- `accel`: Accelerator. Makes the gun charge a little faster.
 ### Mechanics
 ---
 - The weapon requires both a battery and a drum to fire a charged shot. Otherwise only a drum is required.

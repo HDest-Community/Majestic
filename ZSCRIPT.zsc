@@ -60,6 +60,7 @@ class HDMajestic : HDHandgun
 	enum MajesticFlags
 	{
 		MJF_JustUnload = 1, 
+		MJF_Accelerator = 2
 	}
 
 	enum MajesticProperties
@@ -115,6 +116,10 @@ class HDMajestic : HDHandgun
 	override void LoadoutConfigure(string input)
 	{
 		InitializeWepStats();
+		if (GetLoadoutVar(input, "accel", 1) > 0)
+		{
+			WeaponStatus[MJProp_Flags] |= MJF_Accelerator;
+		}
 	}
 
 	override void ForceBasicAmmo()
@@ -313,7 +318,7 @@ class HDMajestic : HDHandgun
 			{
 				A_WeaponReady(WRF_NOFIRE | WRF_ALL);
 				A_CheckMajesticHand();
-				int tier = invoker.Charge / (MaxCharge / Tiers);
+				
 				if (PressingFire() && invoker.WeaponStatus[MJProp_Mag] > 0 || invoker.Charge > 0 && player.GetPSprite(PSP_WEAPON).frame == 1)
 				{
 					if (PressingAltFire() || invoker.WeaponStatus[MJProp_Mag] <= 0 || invoker.MustCancel)
@@ -347,12 +352,13 @@ class HDMajestic : HDHandgun
 					let plr = HDPlayerPawn(self);
 					if (invoker.Charge < (invoker.WeaponStatus[MJProp_Battery] > 0 ? MaxCharge : 1))
 					{
-						invoker.Charge++;
+						invoker.Charge = min(invoker.Charge + (invoker.WeaponStatus[MJProp_Flags] & MJF_Accelerator ? 2 : 1), MaxCharge);
+						int tier = invoker.Charge / (MaxCharge / Tiers);
 
 						if (tier > 0 && !invoker.HasPlayedSound[tier - 1])
 						{
 							invoker.HasPlayedSound[tier - 1] = true;
-							A_StartSound("Majestic/Charge", 10, pitch: 1.0 + 0.1 * (tier - 1));
+							A_StartSound("Majestic/Charge", 10, CHANF_OVERLAP, pitch: 1.0 + 0.1 * (tier - 1));
 						}
 					}
 				}
@@ -698,6 +704,10 @@ class MajesticRandom : IdleDummy
 				if (!wpn)
 				{
 					return;
+				}
+				if (!random(0, 4))
+				{
+					wpn.WeaponStatus[wpn.MJProp_Flags] |= wpn.MJF_Accelerator;
 				}
 
 				HDF.TransferSpecials(self, wpn);
