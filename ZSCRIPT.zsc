@@ -184,7 +184,7 @@ class HDMajestic : HDHandgun
 	override string PickupMessage()
 	{
 		string accStr = WeaponStatus[MJProp_Flags] & MJF_Accelerator ? "accelerated " : "";
-		return String.Format("You got the %s'Majestic' railgun revolver.", accStr);
+		return String.Format("You got the %s'Majestic' magnum railgun.", accStr);
 	}
 
 	override void DrawHUDStuff(HDStatusBar sb, HDWeapon hdw, HDPlayerPawn hpl)
@@ -302,7 +302,7 @@ class HDMajestic : HDHandgun
 		Weapon.SlotPriority 3;
 		HDWeapon.BarrelSize 13, 0.35, 0.5;
 		Scale 0.2;
-		Tag "'Majestic' railgun revolver";
+		Tag "'Majestic' magnum railgun";
 		HDWeapon.Refid "maj";
 	}
 
