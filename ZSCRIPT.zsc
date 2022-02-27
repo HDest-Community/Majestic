@@ -288,7 +288,7 @@ class HDMajestic : HDHandgun
 		}
 	}
 
-	const MaxCharge = 40;
+	const MaxCharge = 60;
 	const Tiers = 3;
 	private int Charge;
 	private bool HasPlayedSound[Tiers];
