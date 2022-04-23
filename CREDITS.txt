@@ -1,6 +1,3 @@
-Code:
-- Accensus
-
 Sounds:
 - Magmacow
   + https://gamebanana.com/sounds/54036 (Hammer)
