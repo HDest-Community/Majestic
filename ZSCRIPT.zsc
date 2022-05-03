@@ -18,7 +18,7 @@ class MajesticHandler : EventHandler
 				}
 				break;
 			case 'HDPistol':
-				if (random[majrand]() <= 96)
+				if (random[majrand]() <= 64)
 				{
 					e.Replacement = "MajesticRandom";
 				}
