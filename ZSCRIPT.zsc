@@ -12,25 +12,25 @@ class MajesticHandler : EventHandler
 		switch (e.Replacement.GetClassName())
 		{
 			case 'ShotgunReplaces':
-				if (random[majrand]() <= 12)
+				if (random[majrand]() < AceCore.GetScaledSpawnChance(-6, 12))
 				{
 					e.Replacement = "MajesticRandom";
 				}
 				break;
 			case 'HDPistol':
-				if (random[majrand]() <= 64)
+				if (random[majrand]() < AceCore.GetScaledSpawnChance(16, 64))
 				{
 					e.Replacement = "MajesticRandom";
 				}
 				break;
 			case 'ShellBoxRandom':
-				if (random[majrand]() <= 10)
+				if (random[majrand]() < 10)
 				{
 					e.Replacement = "HD500SWLightBoxPickup";
 				}
 				break;
 			case 'ClipMagPickup':
-				if (random[majrand]() <= 24)
+				if (random[majrand]() < AceCore.GetScaledSpawnChance(0, 24))
 				{
 					e.Replacement = "HDMajesticMag";
 				}
