@@ -12,13 +12,13 @@ class MajesticHandler : EventHandler
 		switch (e.Replacement.GetClassName())
 		{
 			case 'ShotgunReplaces':
-				if (random[majrand]() < AceCore.GetScaledSpawnChance(-6, 12))
+				if (random[majrand]() < AceCore.GetScaledChance(-6, 12, acl_spawnscale_min, acl_spawnscale_max))
 				{
 					e.Replacement = "MajesticRandom";
 				}
 				break;
 			case 'HDPistol':
-				if (random[majrand]() < AceCore.GetScaledSpawnChance(16, 64))
+				if (random[majrand]() < AceCore.GetScaledChance(16, 64, acl_spawnscale_min, acl_spawnscale_max))
 				{
 					e.Replacement = "MajesticRandom";
 				}
@@ -30,7 +30,7 @@ class MajesticHandler : EventHandler
 				}
 				break;
 			case 'ClipMagPickup':
-				if (random[majrand]() < AceCore.GetScaledSpawnChance(0, 24))
+				if (random[majrand]() < AceCore.GetScaledChance(0, 24, acl_spawnscale_min, acl_spawnscale_max))
 				{
 					e.Replacement = "HDMajesticMag";
 				}
