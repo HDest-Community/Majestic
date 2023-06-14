@@ -447,7 +447,8 @@ class HDMajestic : HDHandgun
 					}
 					for (int i = 0; i < invoker.WeaponStatus[MJProp_SpentRounds]; ++i)
 					{
-						Actor a = A_EjectCasing('HDSpent500', 8, -random(88, 92), frandom(1.0, 2.0), -frandom(0.5, 1.5));
+						Actor a = A_EjectCasing('HDSpent500',frandom(-1,2),(frandom(0.2,0.3),-frandom(7,7.5),frandom(0,0.2)),(0,0,-2));
+															
 						a.roll = random(0, 359);
 					}
 					invoker.WeaponStatus[MJProp_SpentRounds] = 0;
